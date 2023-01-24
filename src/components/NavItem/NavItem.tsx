@@ -6,6 +6,7 @@ interface NavItemProps extends FlexProps {
   icon: IconType;
   children: ReactText;
 }
+
 export const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
   return (
     <Link href="#" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>

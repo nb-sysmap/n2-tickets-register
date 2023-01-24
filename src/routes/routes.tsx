@@ -1,19 +1,23 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "../pages/Home/Home";
-import Login from "../pages/Login/Login";
-
+import { Fragment } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { PrivateRoutes } from '.'
+import Home from '../pages/Home/Home'
+import Login from '../pages/Login/Login'
 
 export function AppRoutes() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-      </Routes>
+      <Fragment>
+        <Routes>
+          <Route path='/' element={<Login />} />
+          <Route path='/home' element={<PrivateRoutes />}>
+            <Route path='/home' element={<Home />} />
+          </Route>
+        </Routes>
+      </Fragment>
     </BrowserRouter>
   )
 }
-
 
 // import { getAuth, signInWithPopup, OAuthProvider } from "firebase/auth";
 
