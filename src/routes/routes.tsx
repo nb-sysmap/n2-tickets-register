@@ -1,6 +1,7 @@
 import { Fragment } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { PrivateRoutes } from '.'
+import Sidebar from '../components/Sidebar/Sidebar'
 import Home from '../pages/Home/Home'
 import Login from '../pages/Login/Login'
 
@@ -11,7 +12,7 @@ export function AppRoutes() {
         <Routes>
           <Route path='/' element={<Login />} />
           <Route path='/home' element={<PrivateRoutes />}>
-            <Route path='/home' element={<Home />} />
+            <Route path='/home' element={<Sidebar children={<Home />} />} />
           </Route>
         </Routes>
       </Fragment>

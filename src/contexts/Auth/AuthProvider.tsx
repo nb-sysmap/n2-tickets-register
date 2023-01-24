@@ -31,9 +31,6 @@ export const AuthProvider = ({ children }: { children: JSX.Element}) => {
         sessionStorage.setItem("@authFirebase:user", JSON.stringify(user))
         sessionStorage.setItem("@authFirebase:token", accessToken)
         
-
-        
-
         // getMicrosoftProfile(accessToken!, idToken!)
         
       })
