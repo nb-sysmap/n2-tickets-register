@@ -1,25 +1,21 @@
-import { BoxProps, useColorModeValue, Flex, Text, CloseButton, Box } from "@chakra-ui/react";
+import { BoxProps, useColorModeValue, Flex, Text, CloseButton, Box, Image } from "@chakra-ui/react";
 import { useContext } from "react";
 import { IconType } from "react-icons";
 import {
   FiHome,
-  FiTrendingUp,
-  FiCompass,
-  FiStar,
-  FiSettings,
-  FiMenu,
-  FiBell,
-  FiChevronDown,
-  FiLogOut
+  FiLogOut,
+  FiPlus
 } from 'react-icons/fi';
 import { AuthContext } from "../../contexts/Auth/AuthContext";
 import { NavItem } from "../NavItem/NavItem";
+
+import logoSysmap from "../../assets/logo_sysmap.png"
 
 interface LinkItemProps {
   type: string
   name: string;
   icon: IconType;
-  path?: string;
+  path: string;
 }
 
 interface LogoutItemProps {
@@ -27,6 +23,7 @@ interface LogoutItemProps {
   name: string;
   icon: IconType;
   logout: () => void;
+  path?: string;
 }
 
 interface SidebarProps extends BoxProps {
@@ -34,12 +31,13 @@ interface SidebarProps extends BoxProps {
 }
 
 export const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+
   const { signOut } = useContext(AuthContext)
   const LinkItems: Array<LinkItemProps | LogoutItemProps> = [
-    { type: 'link', name: 'Home', icon: FiHome },
-    { type: 'link', name: 'Trending', icon: FiTrendingUp },
-    { type: 'link', name: 'Explore', icon: FiCompass },
-    { type: 'link', name: 'Favourites', icon: FiStar },
+    { type: 'link', name: 'Home', icon: FiHome, path: '/home' },
+    { type: 'link', name: 'Cadastrar Ticket', icon: FiPlus, path: '/newticket' },
+    // { type: 'link', name: 'Explore', icon: FiCompass, path: '' },
+    // { type: 'link', name: 'Favourites', icon: FiStar, path: '' },
     { type: 'logout', name: 'Sair', icon: FiLogOut, logout: signOut},
   ];
 
@@ -55,15 +53,16 @@ export const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       {...rest}>
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
         <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          Logo
+          <Image src={logoSysmap} /> 
         </Text>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
-      {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon} onClick={link.type === 'logout' ? signOut : () => {}}>
+      {LinkItems.map((link) => { 
+      return (
+        <NavItem key={link.name} icon={link.icon} path={link.path}  onClick={link.type === 'logout' ? signOut : () => {}}>
           {link.name}
         </NavItem>
-      ))}
+      )})}
     </Box>
   );
 };

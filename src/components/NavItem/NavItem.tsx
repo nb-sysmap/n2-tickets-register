@@ -1,15 +1,17 @@
 import { Flex, FlexProps, Icon, Link } from "@chakra-ui/react";
 import { ReactText } from "react";
 import { IconType } from "react-icons";
+import { Link as Navigate } from "react-router-dom"
 
 interface NavItemProps extends FlexProps {
   icon: IconType;
   children: ReactText;
+  path?: string
 }
 
-export const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+export const NavItem = ({ icon, children, path, ...rest }: NavItemProps) => {
   return (
-    <Link href="#" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
+    <Link as={Navigate} to={path ? path : ''} style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
       <Flex
         align="center"
         p="4"

@@ -1,6 +1,11 @@
+import { Heading } from "@chakra-ui/react";
+import { ViewTickets } from "../../components/ViewTickets/ViewTickets";
 
 export default function Home() {
   return (
-    <h1>Home</h1>
+    <>
+      <Heading mb='10'>Relatório de Tickets N1</Heading>
+      <ViewTickets />
+    </>
   )
 }
